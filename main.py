@@ -1,7 +1,10 @@
 import player  
+import exploration
+import inventory
+import shop
+import combat
 
-
-def splash():
+def splash_main_menu():
 
     print()
     print("             Dungeon Quest")
@@ -10,38 +13,62 @@ def splash():
     print("New game - Load Game - Leaderboard - Quit")
     print()
 
+def splash_game_loop():
+    print("             Dungeon Quest")
+    print()
+    print("       What are you going to do?")
+    print()
+    print("   1          2        3      4")
+    print("Explore - Inventory - Shop - Quit")
+    print()
+
 def choose_option():
 
     x = input("Choose option: ")
     if(x == "1"):
-        print("New Game") #koppla till Newgame function
         return 1
     elif(x == "2"):
-        print("Load Game") #koppla till Loadgame function
         return 2
     elif(x == "3"):
-        print("Leaderboard") #koppla till Leaderboard function
         return 3
     elif(x == "4"):
-        print("Quit") #koppla till Quit function
         return 4
     else:
         print("Invalid input")
         print()
         choose_option()
-    
+
+def game_loop():
+    loopedgame = True
+
+    while loopedgame:
+        splash_game_loop()
+
+        choice = choose_option()
+
+        if choice == 1:
+            print("explore")
+        elif choice == 2:
+            print("inventory")
+        elif choice == 3:
+            print("shop")
+        elif choice == 4:
+            print("Game Quit")
+            loopedgame = False
+
 
 def main():
+
     gametrue = True
-    option = 0
 
     while(gametrue):
-        splash()
+        splash_main_menu()
         option = choose_option()
 
         if(option == 1): #New Game
             character = player.create_character()
-            print(character)
+            print("Your character name is " + character["name"])
+            combat.combat(character)
             gametrue = False
         elif(option == 2): #Load Game
             gametrue = False
@@ -52,7 +79,7 @@ def main():
             gametrue = False
 
     
-
+    game_loop()
 
     
 main()
