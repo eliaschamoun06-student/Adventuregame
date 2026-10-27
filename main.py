@@ -1,8 +1,5 @@
 import player  
 import exploration
-import inventory
-import shop
-import combat
 
 def splash_main_menu():
 
@@ -23,22 +20,15 @@ def splash_game_loop():
     print()
 
 def choose_option():
-
-    x = input("Choose option: ")
-    if(x == "1"):
-        return 1
-    elif(x == "2"):
-        return 2
-    elif(x == "3"):
-        return 3
-    elif(x == "4"):
-        return 4
-    else:
+    while True:
+        x = input("Choose option: ").strip()
+        if x in ("1", "2", "3", "4"):
+            return int(x)
         print("Invalid input")
         print()
-        choose_option()
 
-def game_loop():
+
+def game_loop(character):
     loopedgame = True
 
     while loopedgame:
@@ -47,7 +37,10 @@ def game_loop():
         choice = choose_option()
 
         if choice == 1:
-            print("explore")
+            result = exploration.room_event(character)
+            if result is False:
+                print("Game Over")
+                return
         elif choice == 2:
             print("inventory")
         elif choice == 3:
@@ -58,28 +51,23 @@ def game_loop():
 
 
 def main():
-
-    gametrue = True
-
-    while(gametrue):
+    while True:
         splash_main_menu()
         option = choose_option()
 
-        if(option == 1): #New Game
+        if option == 1:  # New Game
             character = player.create_character()
             print("Your character name is " + character["name"])
-            combat.combat(character)
-            gametrue = False
-        elif(option == 2): #Load Game
-            gametrue = False
-        elif(option == 3): #Leaderboard
-            print("leaderboard")
-            gametrue = False
-        elif(option == 4): #Quit
-            gametrue = False
+            game_loop(character)
+        elif option == 2:  # Load Game
+            character = player.load_character()
+            if character is not None:
+                game_loop(character)
+        elif option == 3:  # Leaderboard
+            print("Leaderboard is not implemented yet")
+        elif option == 4:  # Quit
+            return
 
-    
-    game_loop()
 
-    
-main()
+if __name__ == "__main__":
+    main()
