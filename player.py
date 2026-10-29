@@ -1,5 +1,65 @@
 characters = {}
 
+character_types = {
+    "1": {
+        "type": "Elf",
+        "attack": 25,
+        "defense": 8,
+        "hp": 90
+    },
+    "2": {
+        "type": "Human",
+        "attack": 20,
+        "defense": 10,
+        "hp": 100
+    },
+    "3": {
+        "type": "Dwarf",
+        "attack": 18,
+        "defense": 15,
+        "hp": 120
+    },
+    "4": {
+        "type": "Orc",
+        "attack": 28,
+        "defense": 5,
+        "hp": 110
+    },
+    "5": {
+        "type": "Halfling",
+        "attack": 18,
+        "defense": 14,
+        "hp": 90
+    },
+    "6": {
+        "type": "Goblin",
+        "attack": 24,
+        "defense": 10,
+        "hp": 80
+    }
+}
+
+
+def choose_character_type():
+    print("\nChoose character type:")
+
+    for number, character_type in character_types.items():
+        print(
+            f'{number}) {character_type["type"]}'
+            f' | Attack: {character_type["attack"]}'
+            f' | Defense: {character_type["defense"]}'
+            f' | HP: {character_type["hp"]}'
+        )
+
+    while True:
+        choice = input("Choose: ").strip()
+
+        if choice in character_types:
+            return character_types[choice]
+
+        print("Invalid choice, try again.")
+
+
 def create_character():
     while True:
         name = input("Enter new character name: ").strip()
@@ -9,16 +69,20 @@ def create_character():
         elif name in characters:
             print("Name already in use, try a different one")
         else:
+            character_type = choose_character_type()
+
             character = {
                 "name": name,
-                "attack": 20,
-                "defense": 10,
-                "hp": 100,
-                "max_hp": 100,
+                "type": character_type["type"],
+                "attack": character_type["attack"],
+                "defense": character_type["defense"],
+                "hp": character_type["hp"],
+                "max_hp": character_type["hp"],
                 "rooms_explored": 0,
                 "weapon": None,
                 "shield": None
             }
+
             characters[name] = character
             return character
 
@@ -29,32 +93,44 @@ def load_character():
         return None
 
     names = list(characters)
+
     while True:
         print("\nSaved characters")
         print("-" * 45)
+
         for index, name in enumerate(names, start=1):
             character = characters[name]
             status = "Dead" if character["hp"] == 0 else "Alive"
+
             print(
                 f'{index}) {name}'
+                f' | Type: {character["type"]}'
                 f' | HP: {character["hp"]}/{character["max_hp"]}'
-                f' | Rooms Explored: {character["rooms_explored"]} | {status}'
+                f' | Rooms Explored: {character["rooms_explored"]}'
+                f' | {status}'
             )
+
         print("0) Back")
         choice = input("Choose character: ").strip()
+
         if choice == "0":
             return None
+
         try:
             number = int(choice)
         except ValueError:
             print("Enter a number from the list.")
             continue
+
         if number < 1 or number > len(names):
             print("Enter a number from the list.")
             continue
+
         character = characters[names[number - 1]]
+
         if character["hp"] == 0:
             print("This character is dead and cannot continue.")
             continue
+
         print(f'Welcome back, {character["name"]}!')
         return character
