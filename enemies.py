@@ -23,11 +23,18 @@ enemies = {
     }
 }
 
-def create_monster(monster_type):
+def create_monster(monster_type, rooms_explored):
     monster = enemies[monster_type].copy()
+
+    multiplier = rooms_explored * 0.05 + 1
+
     monster["name"] = monster_type
+    monster["hp"] = round(monster["hp"] * multiplier)
+    monster["attack"] = round(monster["attack"] * multiplier)
+    monster["defense"] = round(monster["defense"] * multiplier)
+
     return monster
 
-def random_monster():
+def random_monster(rooms_explored):
     monster_type = random.choice(list(enemies))
-    return create_monster(monster_type)
+    return create_monster(monster_type, rooms_explored)

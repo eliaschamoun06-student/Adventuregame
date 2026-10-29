@@ -1,4 +1,5 @@
 import enemies
+import inventory
 
 
 def calculate_damage(attack, defense):
@@ -6,7 +7,7 @@ def calculate_damage(attack, defense):
 
 
 def combat(character):
-    monster = enemies.random_monster()
+    monster = enemies.random_monster(character["rooms_explored"])
 
     print(f'\nA {monster["name"]} appears!')
 
@@ -23,20 +24,20 @@ def combat(character):
 
         # Player's turn
         damage = calculate_damage(
-            character["attack"], monster["defense"]
+            inventory.get_stat(character, "attack"), monster["defense"]
         )
         monster["hp"] = max(0, monster["hp"] - damage)
         print(f'You deal {damage} damage!')
 
         # A defeated monster does not get a turn.
         if monster["hp"] == 0:
-            character["victories"] += 1
+            character["rooms_explored"] += 1
             print(f'You defeated the {monster["name"]}!')
             return True
 
         # Monster's turn
         damage = calculate_damage(
-            monster["attack"], character["defense"]
+            monster["attack"], inventory.get_stat(character, "defense")
         )
         character["hp"] = max(0, character["hp"] - damage)
         print(f'The {monster["name"]} deals {damage} damage!')

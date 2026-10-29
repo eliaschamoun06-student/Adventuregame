@@ -1,5 +1,7 @@
-import player  
 import exploration
+import inventory
+import player
+
 
 def splash_main_menu():
 
@@ -10,7 +12,9 @@ def splash_main_menu():
     print("New game - Load Game - Leaderboard - Quit")
     print()
 
-def splash_game_loop():
+def splash_game_loop(character):
+    print()
+    print("R.E " + str(character["rooms_explored"]))
     print("             Dungeon Quest")
     print()
     print("       What are you going to do?")
@@ -22,6 +26,7 @@ def splash_game_loop():
 def choose_option():
     while True:
         x = input("Choose option: ").strip()
+        print()
         if x in ("1", "2", "3", "4"):
             return int(x)
         print("Invalid input")
@@ -32,7 +37,7 @@ def game_loop(character):
     loopedgame = True
 
     while loopedgame:
-        splash_game_loop()
+        splash_game_loop(character)
 
         choice = choose_option()
 
@@ -42,7 +47,9 @@ def game_loop(character):
                 print("Game Over")
                 return
         elif choice == 2:
-            print("inventory")
+            inventory.show_equipment(character)
+            print()
+            input("Press `Enter` to continue!")
         elif choice == 3:
             print("shop")
         elif choice == 4:

@@ -15,7 +15,9 @@ def create_character():
                 "defense": 10,
                 "hp": 100,
                 "max_hp": 100,
-                "victories": 0
+                "rooms_explored": 0,
+                "weapon": None,
+                "shield": None
             }
             characters[name] = character
             return character
@@ -36,7 +38,7 @@ def load_character():
             print(
                 f'{index}) {name}'
                 f' | HP: {character["hp"]}/{character["max_hp"]}'
-                f' | Victories: {character["victories"]} | {status}'
+                f' | Rooms Explored: {character["rooms_explored"]} | {status}'
             )
         print("0) Back")
         choice = input("Choose character: ").strip()
