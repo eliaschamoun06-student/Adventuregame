@@ -33,8 +33,11 @@ def combat(character):
         if monster["hp"] == 0:
             character["rooms_explored"] += 1
             print(f'You defeated the {monster["name"]}!')
-            return True
 
+            character["hp"] = min(character["hp"] + 20, character["max_hp"])
+            print(f'HP after healing: {character["hp"]}/{character["max_hp"]}')
+
+            return True
         # Monster's turn
         damage = calculate_damage(
             monster["attack"], inventory.get_stat(character, "defense")
