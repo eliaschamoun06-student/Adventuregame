@@ -20,6 +20,46 @@ enemies = {
         "hp": 150,
         "attack": 25,
         "defense": 15
+    },
+    "slime": {
+        "hp": 120,
+        "attack": 8,
+        "defense": 2
+    },
+    "giant rat": {
+        "hp": 40,
+        "attack": 12,
+        "defense": 2
+    },
+    "wolf": {
+        "hp": 70,
+        "attack": 22,
+        "defense": 5
+    },
+    "orc": {
+        "hp": 110,
+        "attack": 23,
+        "defense": 12
+    },
+    "zombie": {
+        "hp": 140,
+        "attack": 12,
+        "defense": 5
+    },
+    "ghost": {
+        "hp": 45,
+        "attack": 28,
+        "defense": 3
+    },
+    "stone golem": {
+        "hp": 160,
+        "attack": 15,
+        "defense": 18
+    },
+    "dark knight": {
+        "hp": 90,
+        "attack": 25,
+        "defense": 16
     }
 }
 
