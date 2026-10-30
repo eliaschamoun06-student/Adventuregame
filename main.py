@@ -8,8 +8,8 @@ def splash_main_menu():
     print()
     print("             Dungeon Quest")
     print()
-    print("   1           2            3          4")
-    print("New game - Load Game - Leaderboard - Quit")
+    print("         1          2         3")
+    print("     New game - Load Game - Quit")
     print()
 
 def splash_game_loop(character):
@@ -19,8 +19,8 @@ def splash_game_loop(character):
     print()
     print("       What are you going to do?")
     print()
-    print("   1          2        3      4")
-    print("Explore - Inventory - Shop - Quit")
+    print("         1          2       3")
+    print("     Explore - Inventory - Save")
     print()
 
 def choose_option():
@@ -51,9 +51,7 @@ def game_loop(character):
             print()
             input("Press `Enter` to continue!")
         elif choice == 3:
-            print("shop")
-        elif choice == 4:
-            print("Game Quit")
+            print("Game Saved")
             loopedgame = False
 
 
@@ -70,9 +68,7 @@ def main():
             character = player.load_character()
             if character is not None:
                 game_loop(character)
-        elif option == 3:  # Leaderboard
-            print("Leaderboard is not implemented yet")
-        elif option == 4:  # Quit
+        elif option == 3:  # Quit
             return
 
 

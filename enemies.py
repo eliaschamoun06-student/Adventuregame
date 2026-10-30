@@ -2,76 +2,79 @@ import random
 
 enemies = {
     "goblin": {
-        "hp": 100,
-        "attack": 10,
-        "defense": 10
+        "hp": 50,
+        "attack": 14,
+        "defense": 4
     },
     "spider": {
-        "hp": 60,
-        "attack": 15,
-        "defense": 5
+        "hp": 40,
+        "attack": 16,
+        "defense": 2
     },
     "skeleton": {
-        "hp": 80,
-        "attack": 20,
-        "defense": 10
+        "hp": 55,
+        "attack": 15,
+        "defense": 4
     },
     "troll": {
-        "hp": 150,
-        "attack": 25,
-        "defense": 15
+        "hp": 75,
+        "attack": 16,
+        "defense": 5
     },
     "slime": {
-        "hp": 120,
-        "attack": 8,
+        "hp": 65,
+        "attack": 12,
         "defense": 2
     },
     "giant rat": {
-        "hp": 40,
-        "attack": 12,
-        "defense": 2
+        "hp": 35,
+        "attack": 15,
+        "defense": 1
     },
     "wolf": {
-        "hp": 70,
-        "attack": 22,
-        "defense": 5
+        "hp": 45,
+        "attack": 17,
+        "defense": 2
     },
     "orc": {
-        "hp": 110,
-        "attack": 23,
-        "defense": 12
+        "hp": 60,
+        "attack": 16,
+        "defense": 4
     },
     "zombie": {
-        "hp": 140,
-        "attack": 12,
-        "defense": 5
+        "hp": 70,
+        "attack": 13,
+        "defense": 2
     },
     "ghost": {
-        "hp": 45,
-        "attack": 28,
-        "defense": 3
+        "hp": 35,
+        "attack": 18,
+        "defense": 1
     },
     "stone golem": {
-        "hp": 160,
-        "attack": 15,
-        "defense": 18
+        "hp": 75,
+        "attack": 13,
+        "defense": 6
     },
     "dark knight": {
-        "hp": 90,
-        "attack": 25,
-        "defense": 16
+        "hp": 60,
+        "attack": 16,
+        "defense": 5
     }
 }
 
 def create_monster(monster_type, rooms_explored):
     monster = enemies[monster_type].copy()
 
-    multiplier = rooms_explored * 0.05 + 1
+    # Add a fraction of base stats per completed room (not compounded).
+    hp_multiplier = 1 + rooms_explored * 0.025
+    attack_multiplier = 1 + rooms_explored * 0.025
+    defense_multiplier = 1 + rooms_explored * 0.01
 
     monster["name"] = monster_type
-    monster["hp"] = round(monster["hp"] * multiplier)
-    monster["attack"] = round(monster["attack"] * multiplier)
-    monster["defense"] = round(monster["defense"] * multiplier)
+    monster["hp"] = round(monster["hp"] * hp_multiplier)
+    monster["attack"] = round(monster["attack"] * attack_multiplier)
+    monster["defense"] = round(monster["defense"] * defense_multiplier)
 
     return monster
 

@@ -3,39 +3,39 @@ characters = {}
 character_types = {
     "1": {
         "type": "Elf",
-        "attack": 25,
+        "attack": 27,
         "defense": 8,
-        "hp": 90
+        "hp": 110
     },
     "2": {
         "type": "Human",
-        "attack": 20,
-        "defense": 10,
-        "hp": 100
+        "attack": 25,
+        "defense": 9,
+        "hp": 115
     },
     "3": {
         "type": "Dwarf",
-        "attack": 18,
-        "defense": 15,
+        "attack": 23,
+        "defense": 10,
         "hp": 120
     },
     "4": {
         "type": "Orc",
         "attack": 28,
-        "defense": 5,
-        "hp": 110
+        "defense": 7,
+        "hp": 115
     },
     "5": {
         "type": "Halfling",
-        "attack": 18,
-        "defense": 14,
-        "hp": 90
+        "attack": 24,
+        "defense": 10,
+        "hp": 105
     },
     "6": {
         "type": "Goblin",
-        "attack": 24,
-        "defense": 10,
-        "hp": 80
+        "attack": 28,
+        "defense": 8,
+        "hp": 100
     }
 }
 
